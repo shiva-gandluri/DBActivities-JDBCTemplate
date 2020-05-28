@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,25 +16,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FirstController {
+	@Autowired
+	UserJDBCTemplate mysqlService;
 	
 	Integer id;
 	Integer age;
-	String First;
-	String Last;
+	String first;
+	String last;
+
+
 
 	@PostMapping (value = "/Record-Data")
 	public void setValues(@RequestBody UserDetails input)
 	 {
 		 this.id = input.getId();
-		 this.First = input.getFirstName();
-		 this.Last = input.getLastName();
+		 this.first = input.getFirstName();
+		 this.last = input.getLastName();
 		 this.age = input.getAge();
 		 
-		 UserJDBCTemplate user = new UserJDBCTemplate();
+		
 		 //user.setDataSource(Datasource ds);
-		 user.update(this.id, this.First, this.Last, this.age);
+		 mysqlService.updateInfo(id, first, last, age);
 		 System.out.println("Update Successful");
-		 user.getUserDetails();
+		 mysqlService.getUserDetails();
 
 	 
 	 }	
