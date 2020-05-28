@@ -1,11 +1,14 @@
 package com.example.practice;
 
+import java.sql.Types;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
-
+import org.springframework.stereotype.Service;
+@Service
 public class UserJDBCTemplate implements UserDAO{
 	   //private DataSource dataSource;
 	   //private JdbcTemplate jdbcTemplate;
@@ -13,12 +16,23 @@ public class UserJDBCTemplate implements UserDAO{
 		@Autowired
 		JdbcTemplate mysqlService;
 
-	@Override
-	public void update(Integer id, String First, String Last, Integer age) {
+	/*@Override
+	public void setDataSource(DataSource dataSource) {
 		// TODO Auto-generated method stub
-		String Update_EMPLOYEE_SQL="INSERT INTO Registration " +
-				"VALUES ("+id+", '"+First+"', '"+Last+"', "+age+")";
-		mysqlService.update(Update_EMPLOYEE_SQL, id, First, Last, age);
+	      this.dataSource = dataSource;
+	      this.jdbcTemplate = new JdbcTemplate(this.dataSource);
+	}*/
+	@Override
+	public void updateInfo(Integer id, String First, String Last, Integer age) {
+		// TODO Auto-generated method stub
+		String Update_EMPLOYEE_SQL="INSERT INTO Registration VALUES (?, ?, ?, ?)";
+		//mysqlService.update(Update_EMPLOYEE_SQL, id, First, Last, age);
+		// define query arguments
+		Object[] params = {id, First, Last, age};
+		// define SQL types of the arguments
+		int[] types = {Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.INTEGER};
+		int rows = mysqlService.update(Update_EMPLOYEE_SQL, params, types);
+		System.out.println(rows + " row(s) updated.");
 		return ;
 		
 	}
