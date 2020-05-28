@@ -6,7 +6,9 @@ public interface UserDAO {
 
    public void setDataSource(DataSource ds);
 
-   public void update(Integer id, String First, String Last, Integer age);
+   //public void update(Integer id, String First, String Last, Integer age);
    
    public UserDetails getUserDetails();
+
+   public void updateInfo(Integer id, String First, String Last, Integer age);
 }
