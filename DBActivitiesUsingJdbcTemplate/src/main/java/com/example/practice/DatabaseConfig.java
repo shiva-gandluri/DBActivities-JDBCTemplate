@@ -1,4 +1,4 @@
-package com.gurucul.d3;
+package com.example.practice;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +18,11 @@ public class DatabaseConfig {
    public DataSource mysqlDatasource() {
       return DataSourceBuilder.create().build();
    }
-   /*
-   @Bean(name = "crate")
-   @ConfigurationProperties(prefix = "spring.crate")
-   public DataSource crateDatasource() {
-      return DataSourceBuilder.create().build();
-   }*/
+  
    @Bean(name = "mysqlService")
    @Autowired
    public JdbcTemplate createMysqlJdbcTemplate(@Qualifier("mysql") DataSource mysqlDS) {
+	   System.out.println(mysqlDS);
       return new JdbcTemplate(mysqlDS);
    }
-/*   @Bean(name = "crateService")
-   @Autowired
-   public JdbcTemplate createCrateJdbcTemplate(@Qualifier("crate") DataSource crateDS) {
-      return new JdbcTemplate(crateDS);
-   }*/
 }
