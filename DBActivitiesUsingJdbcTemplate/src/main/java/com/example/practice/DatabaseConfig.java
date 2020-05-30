@@ -12,17 +12,18 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class DatabaseConfig {
-   @Bean(name = "mysql")
-   @ConfigurationProperties(prefix = "spring.mysql")
-   @Primary
-   public DataSource mysqlDatasource() {
-      return DataSourceBuilder.create().build();
-   }
-  
-   @Bean(name = "mysqlService")
-   @Autowired
-   public JdbcTemplate createMysqlJdbcTemplate(@Qualifier("mysql") DataSource mysqlDS) {
-	   System.out.println(mysqlDS);
-      return new JdbcTemplate(mysqlDS);
-   }
+	
+	   @Bean(name = "mysql")
+	   @ConfigurationProperties(prefix = "spring.mysql")
+	   @Primary
+	   public DataSource mysqlDatasource() {
+	      return DataSourceBuilder.create().build();
+	   }
+	  
+	   @Bean(name = "mysqlService")
+	   @Autowired
+	   public JdbcTemplate createMysqlJdbcTemplate(@Qualifier("mysql") DataSource mysqlDS) {
+		   return new JdbcTemplate(mysqlDS);
+	   }
+	   
 }

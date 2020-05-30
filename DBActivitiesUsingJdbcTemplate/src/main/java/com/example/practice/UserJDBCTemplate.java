@@ -26,13 +26,13 @@ public class UserJDBCTemplate implements UserDAO{
 	public void updateInfo(Integer id, String First, String Last, Integer age) {
 		// TODO Auto-generated method stub
 		String Update_EMPLOYEE_SQL="INSERT INTO Registration VALUES (?, ?, ?, ?)";
-		//mysqlService.update(Update_EMPLOYEE_SQL, id, First, Last, age);
+		mysqlService.update(Update_EMPLOYEE_SQL, id, First, Last, age);
 		// define query arguments
-		Object[] params = {id, First, Last, age};
+		//Object[] params = {id, First, Last, age};
 		// define SQL types of the arguments
-		int[] types = {Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.INTEGER};
-		int rows = mysqlService.update(Update_EMPLOYEE_SQL, params, types);
-		System.out.println(rows + " row(s) updated.");
+		//int[] types = {Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.INTEGER};
+		//int rows = mysqlService.update(Update_EMPLOYEE_SQL, id, First, Last, age);
+		//System.out.println(rows + " row(s) updated.");
 		return ;
 		
 	}
